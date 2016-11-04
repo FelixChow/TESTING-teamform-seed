@@ -9,91 +9,139 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Teamform - TESTING</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/custom.js"></script>
+    <!-- UI-Boostrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.1/ui-bootstrap-tpls.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="css/custom.css" rel="stylesheet">
 
 </head>
 
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBKPa_aZAr7C23kkYli_wPPSH069aYLRIM",
+    authDomain: "lab-firebase-aefba.firebaseapp.com",
+    databaseURL: "https://lab-firebase-aefba.firebaseio.com",
+    storageBucket: "lab-firebase-aefba.appspot.com",
+    messagingSenderId: "470761339277"
+  };
+  firebase.initializeApp(config);
+</script>
+
 <body>
 
-    <div id="wrapper">
+        <div ng-app="teamform" ng-controller="myCtrl">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+            <div id="wrapper" class = {{isToggled}}>
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                {{firstName}} {{lastName}}
+                            </a>
+                        </li>
+
+                        <br>
+
+                        <div id = "event-list">Lastest events:
+
+                            <li ng-repeat="event in events">
+                                <a href="#">{{ event.$value }}</a>
+                            </li>
+
+                        </div>
+
+                        <br>
+
+                        <div id = "team-list">Your teams:
+
+                            <li>
+                                <a href="#">Team1</a>
+                            </li>
+                            <li>
+                                <a href="#">Team2</a>
+                            </li>
+                            <li>
+                                <a href="#">Team3</a>
+                            </li>
+
+                        </div>
+
+                        <br>
+
+                        <div id = "log-out">
+
+                            <li>
+                                <a href="#">Log out</a>
+                            </li>
+                            
+                        </div>
+
+                    </ul>
+                </div>
+                <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <a href="#sidebar-toggle" class="btn btn-default" id="sidebar-toggle" ng-click="toggleWrapper()" >|||</a>
+
+                                <h1>Annoucements</h1>
+                                <p>from event/team: #</p>
+
+                            </div>
+
+                            <div class="col-lg-8" id = "left-panel">
+                                <div class="panel panel-default panel-custom">
+                                  <div class="panel-body">Chat Room</div>
+                                  <div> Message1: ...</div>
+                                  <div> Message2: ...</div>
+                                  <div> Message3: ...</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4" id = "right-panel">
+                                <div class="panel panel-default panel-custom">
+                                  <div class="panel-body">Teams from event:#</div>
+
+                                  <div> Team1: ...
+                                      <div> Team member1: ...</div>
+                                      <div> Team member2: ...</div>
+                                      <div> Team member3: ...</div>
+                                  </div>
+                                  <br>
+                                  <div> Team2: ...</div>
+                                  <div> Team3: ...</div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                <!-- /#page-content-wrapper -->
+
             </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
+            <!-- /#wrapper -->
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 
 </body>
 
