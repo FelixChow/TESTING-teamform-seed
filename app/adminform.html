@@ -1,59 +1,64 @@
-<html>
+<html ng-app="adminform">
 
 <head>
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+
+
 </head>
 
-<body>
-	<form>
-		<div class="col-md-6 form-group">
+<body ng-controller="AdminFormCtrl">
+	<form ng-submit="addEvent()">
+		<div class="form-group">
 			<label for="InputEventName">Event Name</label>
-			<input type="text" class="form-control" id="InputEventName" placeholder="EventName" </div>
-			<div class="form-group">
-				<label for="InputOrganizer">Organizer</label>
-				<input type="text" class="form-control" id="InputOrganizer" placeholder="Organizer" </div>
-				<div class="form-group">
-					<label for="InputCourse">Course</label>
-					<input type="text" class="form-control" id="InputCourse" placeholder="TargetCourse">
-				</div>
-				<label for="dtp_input2" class="control-label">Deadline</label>
-				<div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2"
-					data-link-format="yyyy-mm-dd">
-					<input class="form-control" size="16" type="text" value="" readonly>
-					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-				</div>
-				<input type="hidden" id="dtp_input2" value="" /><br/>
-				<div class="form-group">
-					<label for="InputNumOfTeam">Number of Teams</label>
-					<input type="text" class="form-control" id="InputNumOfTeam" placeholder="eg. 5">
-				</div>
-				<div class="form-group">
-					<label for="InputNumOfMember">Number of Team Members</label>
-					<input type="text" class="form-control" id="InputNumOfMember" placeholder="eg. 5">
-				</div>
-				<div class "form-group">
-                    <label for="InputPrivacy">Event Privacy</label></br>
-					<div class="radio-inline">
-						<label><input type="radio" name="optradio">Public</label>
-					</div>
-					<div class="radio-inline">
-						<label><input type="radio" name="optradio">Private</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputFile">File input</label>
-					<input type="file" id="exampleInputFile">
-					<p class="help-block">Example block-level help text here.</p>
-				</div>
-				<div class="checkbox">
-					<label>
-      <input type="checkbox"> Check me out
-    </label>
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+			<input type="text" class="form-control" id="InputEventName" placeholder="EventName" ng-model="event.name">
+		</div>
+		<div class="form-group">
+			<label for="InputOrganizer">Organizer</label>
+			<input type="text" class="form-control" id="InputOrganizer" placeholder="Organizer" ng-model="event.organizer">
+		</div>
+		<div class="form-group">
+			<label for="InputCourse">Course</label>
+			<input type="text" class="form-control" id="InputCourse" placeholder="TargetCourse" ng-model="event.course">
+		</div>
+		<label for="dtp_input2" class="control-label">Deadline</label>
+		<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+			<input class="form-control" size="16" type="text" value="" readonly ng-model="">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		</div>
+		<input type="hidden" id="dtp_input2" value="" /><br/>
+		<div class="form-group">
+			<label for="InputNumOfTeam">Number of Teams</label>
+			<input type="text" class="form-control" id="InputNumOfTeam" placeholder="eg. 5" ng-model="event.numOfTeam">
+		</div>
+		<div class="form-group">
+			<label for="InputNumOfMember">Number of Team Members</label>
+			<input type="text" class="form-control" id="InputNumOfMember" placeholder="eg. 5" ng-model="event.numOfMem">
+		</div>
+		<div class "form-group">
+			<label for="InputPrivacy">Event Privacy</label></br>
+			<div class="radio-inline">
+				<label><input type="radio" name="optradio">Public</label>
+			</div>
+			<div class="radio-inline">
+				<label><input type="radio" name="optradio">Private</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="InputDescription">Description:</label>
+			<textarea class="form-control" rows="5" id="InputDescription" ng-model="event.description"></textarea>
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
 </body>
-
 
 <footer>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
