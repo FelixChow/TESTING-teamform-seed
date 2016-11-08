@@ -18,15 +18,15 @@
 	<form ng-submit="addEvent()">
 		<div class="form-group">
 			<label for="InputEventName">Event Name</label>
-			<input type="text" class="form-control" id="InputEventName" placeholder="EventName" ng-model="event.name">
+			<input type="text" class="form-control" id="InputEventName" placeholder="Event Name" ng-model="newEvent.name" required>
 		</div>
 		<div class="form-group">
 			<label for="InputOrganizer">Organizer</label>
-			<input type="text" class="form-control" id="InputOrganizer" placeholder="Organizer" ng-model="event.organizer">
+			<input type="text" class="form-control" id="InputOrganizer" placeholder="Organizer" ng-model="newEvent.organizer" required>
 		</div>
 		<div class="form-group">
 			<label for="InputCourse">Course</label>
-			<input type="text" class="form-control" id="InputCourse" placeholder="TargetCourse" ng-model="event.course">
+			<input type="text" class="form-control" id="InputCourse" placeholder="Target Course" ng-model="newEvent.course" required>
 		</div>
 		<label for="dtp_input2" class="control-label">Deadline</label>
 		<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
@@ -37,11 +37,11 @@
 		<input type="hidden" id="dtp_input2" value="" /><br/>
 		<div class="form-group">
 			<label for="InputNumOfTeam">Number of Teams</label>
-			<input type="text" class="form-control" id="InputNumOfTeam" placeholder="eg. 5" ng-model="event.numOfTeam">
+			<input type="text" class="form-control" id="InputNumOfTeam" placeholder="eg. 5" ng-model="newEvent.numOfTeam">
 		</div>
 		<div class="form-group">
 			<label for="InputNumOfMember">Number of Team Members</label>
-			<input type="text" class="form-control" id="InputNumOfMember" placeholder="eg. 5" ng-model="event.numOfMem">
+			<input type="text" class="form-control" id="InputNumOfMember" placeholder="eg. 5" ng-model="newEvent.numOfMem">
 		</div>
 		<div class "form-group">
 			<label for="InputPrivacy">Event Privacy</label></br>
@@ -54,9 +54,9 @@
 		</div>
 		<div class="form-group">
 			<label for="InputDescription">Description:</label>
-			<textarea class="form-control" rows="5" id="InputDescription" ng-model="event.description"></textarea>
+			<textarea class="form-control" rows="5" id="InputDescription" placeholder="Add description here..." ng-model="newEvent.description"></textarea>
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="submit" class="btn btn-default" ng-click="addEvent()">Submit</button>
 	</form>
 </body>
 

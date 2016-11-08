@@ -9,34 +9,30 @@ function initializeFirebase() {
     firebase.initializeApp(config);
 }
 
-var app = angular.module("adminform", ["firebase"]);
+var app = angular.module("Events", ["firebase"]);
 
-app.controller("AdminFormCtrl", function ($scope, $firebaseObject) {
+app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     initializeFirebase();
-    var ref = firebase.database().ref();
+
+    $scope.newEvent = {
+        name: "",
+        organizer: "",
+        course: "",
+        //deadline: "",
+        numOfTeam: 0,
+        numOfMem: 0,
+        //privacy: 0,
+        description: ""
+    }
+
+    var ref = firebase.database().ref("Events");
     $scope.event = $firebaseObject(ref);
 
-}
+    $scope.addEvent = function () {
+        $scope.event.$add($scope.newEvent);
+    }
 
-
-function ($scope, $firebaseArray) {
-        var ref = firebase.database().ref().child("event");
-
-        $scope.event = $firebaseArray(ref);
-
-        $scope.addEvent = function () {
-            $scope.event.$add({
-                name: $scope.eventName,
-                organizer: $scope.eventOrganizer,
-                course: $scope.TargetCourse,
-                deadline: $scope.RegDeadline,
-                numOfTeam: $scope.TeamLimit,
-                numOfMem: $scope.MemberLimit,
-                privacy: $scope.EventPrivacy,
-                description: $scope.EventDescription
-            });
-        };
-    });
+});
 
 $('.form_date').datetimepicker({
     // language: '',
