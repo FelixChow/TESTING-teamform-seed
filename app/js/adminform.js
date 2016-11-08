@@ -14,28 +14,52 @@ var app = angular.module("Events", ["firebase"]);
 app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     initializeFirebase();
 
-    $scope.newEvent = {
-        name: "",
+    $scope.input = {
         organizer: "",
+        semester: "",
         course: "",
-        //deadline: "",
-        numOfTeam: 0,
-        numOfMem: 0,
-        //privacy: 0,
-        description: ""
+        title: "",
+        deadline: "",
+        numOfTeam: "",
+        maxMem: 4,
+        minMem: 1,
+        privacy: "public",
+        desc: ""
     }
 
     var ref = firebase.database().ref("Events");
-    $scope.event = $firebaseObject(ref);
+    $scope.event = $firebaseArray(ref);
 
     $scope.addEvent = function () {
-        $scope.event.$add($scope.newEvent);
+        if ($scope.input.semester == "" && $scope.input.course == "") {
+            $scope.input.semester = $scope.input.course = "Not Applicable";
+        }
+        $scope.event.$add($scope.input);
+    }
+
+    $scope.editMaxMem = function (i) {
+        $scope.input.maxMem += i;
+        if($scope.input.maxMem < 1)
+            $scope.input.maxMem = 1;
+        if ($scope.input.maxMem < $scope.input.minMem)
+            $scope.input.minMem = $scope.input.maxMem;
+    }
+
+    $scope.editMinMem = function (i) {
+        $scope.input.minMem += i;
+        if ($scope.input.minMem > $scope.input.maxMem)
+            $scope.input.maxMem = $scope.input.minMem;
+        if ($scope.input.minMem < 1)
+            $scope.input.minMem = 1;
     }
 
 });
 
+$('.dropdown-toggle').dropdown();
+
+$().dropdown('toggle');
+
 $('.form_date').datetimepicker({
-    // language: '',
     weekStart: 1,
     todayBtn: 1,
     autoclose: 1,
